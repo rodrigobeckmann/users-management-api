@@ -12,6 +12,15 @@ const getUserById = async (id) => {
   }
 }
 
+const listAllUsers = async () => {
+  try {
+    const users = await User.findAll({ attributes: { exclude: ['password'] } });
+    return { status: 200, data: users };
+  } catch (error) {
+    return handleError(error);
+  }
+}
+
 const createUser = async (user) => {
   try {
     const { fullName, email, password } = user;
@@ -28,4 +37,5 @@ const createUser = async (user) => {
 module.exports = {
   getUserById,
   createUser,
+  listAllUsers,
 }
