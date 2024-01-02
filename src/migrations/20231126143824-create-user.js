@@ -10,31 +10,31 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      fullName: {
+      full_name: {
         type: Sequelize.STRING,
-        allowNull:false
+        allowNull: false,
       },
       email: {
         type: Sequelize.STRING,
-        unique:true,
-        allowNull:false
+        unique: true,
+        allowNull: false
       },
       password: {
         type: Sequelize.STRING,
-        allowNull:false,
+        allowNull: false,
       },
-      isAdmin: {
+      user_picture: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      full_address: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      is_admin: {
         type: Sequelize.BOOLEAN,
-        defaultValue:false
+        defaultValue: false,
       },
-      createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      }
     });
   },
   async down(queryInterface, _Sequelize) {

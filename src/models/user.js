@@ -19,18 +19,23 @@ const UserModel = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull:false,
     },
+    userPicture: {
+      type: DataTypes.STRING,
+      allowNull:true,
+    },
+    fullAddress: {
+      type: DataTypes.STRING,
+      allowNull:false,
+    },
     isAdmin: {
       type: DataTypes.BOOLEAN,
       defaultValue:false
     },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    updatedAt: {
-      type:DataTypes.DATE,
-      allowNull: false,
-    }
+  },
+  {
+    timestamps: false,
+    underscored: true,
+    tableName: 'Users',
   });
   return User;
 }
