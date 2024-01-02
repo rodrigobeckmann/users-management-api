@@ -6,12 +6,6 @@ const userLogin = async (req, res) => {
   return res.status(status).json(data);
 }
 
-const adminLogin = async (req, res) => {
-  const { email, password } = req.body;
-  const { status, data } = await loginService.adminLogin(email, password);
-  return res.status(status).json(data);
-}
-
 const verifyUser = async (req, res) => {
   const user = req.user;
   const { status, data } = await loginService.verifyUser(user);
@@ -20,6 +14,5 @@ const verifyUser = async (req, res) => {
 
 module.exports = {
   userLogin,
-  adminLogin,
   verifyUser,
 };
