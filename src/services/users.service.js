@@ -34,8 +34,22 @@ const createUser = async (user) => {
   }
 }
 
+const updateUser = async (id, body) => {
+  try {
+    const { fullName, userPicture, fullAddress } = body;
+    if (!fullName || !userPicture || !fullAddress) throw new customError('One or more required fields are missing!', 400);
+    const foundUser = await User.findByPk(id, { attributes: { exclude: ['password'] } });
+    if (!foundUser) throw new customError('User not found!', 404);
+    const updatedUser = await foundUser.update(body);
+    return { status: 200, data: updatedUser };
+  } catch (error) {
+    return handleError(error);
+  }
+}
+
 module.exports = {
   getUserById,
-  createUser,
   listAllUsers,
+  createUser,
+  updateUser,
 }

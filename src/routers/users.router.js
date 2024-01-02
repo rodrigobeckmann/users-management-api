@@ -8,5 +8,6 @@ const usersRouter = Router();
 usersRouter.post('/', userController.createUser);
 usersRouter.get('/', adminValidation, userController.listAllUsers);
 usersRouter.get('/:id', userValidation, userController.getUserById);
+usersRouter.patch('/:id', userValidation, userController.updatedUser);
 
 module.exports = usersRouter;

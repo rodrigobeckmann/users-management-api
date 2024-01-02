@@ -22,8 +22,19 @@ const createUser = async (req, res) => {
   return res.status(status).json(data);
 }
 
+const updatedUser = async (req, res) => {
+  const { fullName, userPicture, fullAddress } = req.body;
+  const { id } = req.params;
+
+  const { status, data } = await userService.updateUser(id, { fullName, userPicture, fullAddress });
+
+  return res.status(status).json(data);
+
+}
+
 module.exports = {
   createUser,
   getUserById,
   listAllUsers,
+  updatedUser,
 }
