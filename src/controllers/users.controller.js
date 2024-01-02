@@ -32,9 +32,18 @@ const updatedUser = async (req, res) => {
 
 }
 
+const deleteUser = async (req, res) => {
+  const { id } = req.params;
+
+  const { status } = await userService.deleteUser(id);
+
+  return res.status(status).json();
+}
+
 module.exports = {
   createUser,
   getUserById,
   listAllUsers,
   updatedUser,
+  deleteUser,
 }

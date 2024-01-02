@@ -47,9 +47,21 @@ const updateUser = async (id, body) => {
   }
 }
 
+const deleteUser = async (id) => {
+  try {
+    const foundUser = await User.findByPk(id);
+    if (!foundUser) throw new customError('User not found!', 404);
+    await foundUser.destroy();
+    return { status: 204 };
+  } catch (error) {
+    return handleError(error);
+  }
+}
+
 module.exports = {
   getUserById,
   listAllUsers,
   createUser,
   updateUser,
+  deleteUser,
 }
