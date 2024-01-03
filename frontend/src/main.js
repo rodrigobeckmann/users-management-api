@@ -6,6 +6,12 @@ import ControlPanel from './views/ControlPanel.vue'
 import UserPanel from './views/UserPanel.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faUsers } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faUsers)
+
 const routes = [
   { path: '/', component: Login},
   { path: '/control-panel', component: ControlPanel },
@@ -18,5 +24,6 @@ const router = createRouter({
 })
 
 createApp(App)
+.component('font-awesome-icon', FontAwesomeIcon)
 .use(router)
 .mount('#app')
