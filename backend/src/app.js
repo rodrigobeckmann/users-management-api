@@ -9,6 +9,7 @@ app.use(cors({
   origin: process.env.FRONTEND_URL,
 }));
 
+
 app.use(express.json());
 app.use('/login', loginRouter);
 app.use('/users', userRouter);
