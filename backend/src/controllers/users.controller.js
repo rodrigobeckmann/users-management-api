@@ -8,6 +8,14 @@ const getUserById = async (req, res) => {
   return res.status(status).json(data);
 }
 
+const getLoggedUser = async (req, res) => {
+  const { id } = req.user;
+
+  const { status, data } = await userService.getUserById(id);
+
+  return res.status(status).json(data);
+}
+
 const listAllUsers = async (_req, res) => {
   const { status, data } = await userService.listAllUsers();
 
@@ -43,6 +51,7 @@ const deleteUser = async (req, res) => {
 module.exports = {
   createUser,
   getUserById,
+  getLoggedUser,
   listAllUsers,
   updatedUser,
   deleteUser,

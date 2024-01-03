@@ -20,8 +20,8 @@ const verifyUser = async (user) => {
     if (!user) throw new customError('User not found', 404)
     const foundUser = await User.findOne({ where: { email: user.email } }, { exclude: ['password'] });
     if (!foundUser) throw new customError('User not found', 404)
-    const { isAdmin } = foundUser;
-    return { status: 200, data: { isAdmin } };
+    const { isAdmin, id } = foundUser;
+    return { status: 200, data: { isAdmin, id } };
   } catch (error) {
     return handleError(error);
   }
