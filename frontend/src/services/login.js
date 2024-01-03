@@ -7,6 +7,15 @@ export const login = async (credentials) => {
   return response.data
 }
 
+export const verifyLogin = async () => {
+  try {
+    await axios.get(`/login/verify`)
+    return true
+  } catch {
+    return false
+  }
+}
+
 export const getAllUsers = async () => {
   const response = await axios.get(`/users`)
   return response.data

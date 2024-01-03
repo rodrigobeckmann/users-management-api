@@ -1,16 +1,27 @@
 <script setup>
-import { login, getAllUsers } from './services/login'
+import { login, getAllUsers, verifyLogin } from './services/login'
 import { onBeforeMount, ref } from 'vue'
 
 const email = ref('')
 const password = ref('')
+const isLoggedIn = ref(false)
 
 const handleLogin = async (e) => {
   e.preventDefault()
-  await login({email: email.value, password: password.value})
+  const response = await login({email: email.value, password: password.value})
+  if (response) {
+    isLoggedIn.value = false
+  }
+}
+
+const logoff = async () => {
+  const pastDate = new Date(0).toUTCString();
+  document.cookie = 'token=; expires=' + pastDate + '; path=/;';
+  isLoggedIn.value = false
 }
 
 onBeforeMount(async () => {
+  isLoggedIn.value = await verifyLogin()
   const users = await getAllUsers()
   console.log(users)
 })
@@ -20,7 +31,8 @@ onBeforeMount(async () => {
   <form :onSubmit="handleLogin">
     <input v-model="email" type="text" placeholder="email" />
     <input v-model="password" type="password" placeholder="password" />
-    <button type="submit">Login</button>
+    <button :disabled="isLoggedIn" type="submit">Login</button>
+    <button :disabled="!isLoggedIn" type="button" @click="logoff">Logoff</button>
   </form>
 </template>
 
