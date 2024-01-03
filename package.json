@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "install:back": "cd ./backend && npm install",
-    "install:all": "npm run install:back",
+    "install:front": "cd ./frontend && npm install",
+    "install:all": "npm run install:back && npm run install:front",
     "docker:reset": "docker compose down && docker compose up -d"
   },
   "author": "Rodrigo Beckmann",

@@ -1,6 +1,14 @@
 version: '3'
 
 services:
+  frontend:
+    build: ./frontend
+    container_name: users-management-web
+    volumes:
+      - ./frontend:/frontend
+    ports:
+      - 3000:3000
+    working_dir: /frontend
   node:
     build: ./backend
     user: node
