@@ -10,7 +10,7 @@ const handleLogin = async (e) => {
   e.preventDefault()
   const response = await login({email: email.value, password: password.value})
   if (response) {
-    isLoggedIn.value = false
+    isLoggedIn.value = true
   }
 }
 
