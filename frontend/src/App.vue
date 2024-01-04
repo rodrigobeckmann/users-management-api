@@ -1,3 +1,8 @@
+<template>
+  <Header :userName="userName" :userLogged="userLogged" v-on:logoff="handleLogOff"/>
+  <router-view/>
+</template>
+
 <script setup>
 import { useRouter } from 'vue-router'
 import { getLoggedUser } from './services/login';
@@ -59,23 +64,3 @@ onBeforeMount(async () => {
   await redirectUser()
 })
 </script>
-
-<template>
-  <Header :userName="userName" :userLogged="userLogged" v-on:logoff="handleLogOff"/>
-  <router-view/>
-</template>
-
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
