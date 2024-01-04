@@ -1,27 +1,49 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { getLoggedUser } from './services/login';
-import { onBeforeMount } from 'vue'
+import { onBeforeMount, ref } from 'vue'
+import Header from './components/Header.vue';
 
 const router = useRouter()
+const userLogged = ref(false)
+const userId = ref(0)
+const isAdmin = ref(false)
 
-onBeforeMount(async () => {
+const updateUser = async () => {
   const response = await getLoggedUser()
   if (response) {
-    if (response.isAdmin) {
+    userLogged.value = true
+    userId.value = response.id
+    isAdmin.value = response.isAdmin
+  } else {
+    userLogged.value = false
+    userId.value = 0
+    isAdmin.value = false
+  }
+}
+
+const redirectUser = async () => {
+  if (userLogged.value) {
+    if (isAdmin.value) {
       if (router.currentRoute.value.path === '/') {
         router.push('/control-panel')
       }
     } else {
-      router.push('/user/' + response.id)
+      router.push('/user/' + userId.value)
     }
   } else {
     router.push('/')
   }
+}
+
+onBeforeMount(async () => {
+  await updateUser()
+  await redirectUser()
 })
 </script>
 
 <template>
+  <Header/>
   <router-view/>
 </template>
 
