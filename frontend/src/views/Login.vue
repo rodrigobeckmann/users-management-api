@@ -5,7 +5,6 @@
       <div class="flex flex-col">
         <input class="rounded shadow-md mb-2" v-model="email" type="email" placeholder="email" />
         <input class="rounded shadow-md mb-2" v-model="password" type="password" placeholder="password" />
-        <p class="text-xs font-mono text-red-600 italic">email e/ou senha inválidos</p>
       </div>
       <button class="bg-cyan-200 w-1/2 h-1/4 border border-solid rounded shadow-md" type="submit">Login</button>
     </form>
@@ -13,28 +12,25 @@
 </template>
 
 <script setup>
-import { login, getAllUsers, verifyLogin } from '../services/login'
-import { onBeforeMount, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { login } from '../services/login'
+import { ref } from 'vue'
+import swal from 'sweetalert2'
 
 const email = ref('')
 const password = ref('')
 
-const router = useRouter()
-
 const handleLogin = async (e) => {
   e.preventDefault()
-  const response = await login({ email: email.value, password: password.value })
-  if (response) {
-    const { isAdmin } = await verifyLogin()
-    if (isAdmin) {
-      router.push('/control-panel')
-    } else {
-      router.push('/')
-    }
+  try {
+    await login({ email: email.value, password: password.value })
+    location.reload()
+  } catch {
+    swal.fire({
+      title: 'Error',
+      text: 'Invalid email or password',
+      icon: 'error',
+      confirmButtonText: 'Ok'
+    })
   }
 }
-
-
-
 </script>
