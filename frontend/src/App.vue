@@ -8,6 +8,20 @@ const router = useRouter()
 const userLogged = ref(false)
 const userId = ref(0)
 const isAdmin = ref(false)
+const userName = ref('')
+
+const logOff = async () => {
+  const pastDate = new Date(0).toUTCString();
+  document.cookie = 'token=; expires=' + pastDate + '; path=/;';
+  router.push('/')
+}
+
+const clearUser = async () => {
+  userLogged.value = false
+  userId.value = 0
+  isAdmin.value = false
+  userName.value = ''
+}
 
 const updateUser = async () => {
   const response = await getLoggedUser()
@@ -15,10 +29,9 @@ const updateUser = async () => {
     userLogged.value = true
     userId.value = response.id
     isAdmin.value = response.isAdmin
+    userName.value = response.fullName
   } else {
-    userLogged.value = false
-    userId.value = 0
-    isAdmin.value = false
+    clearUser()
   }
 }
 
@@ -36,6 +49,11 @@ const redirectUser = async () => {
   }
 }
 
+const handleLogOff = async () => {
+  await logOff()
+  await clearUser()
+}
+
 onBeforeMount(async () => {
   await updateUser()
   await redirectUser()
@@ -43,7 +61,7 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-  <Header/>
+  <Header :userName="userName" :userLogged="userLogged" v-on:logoff="handleLogOff"/>
   <router-view/>
 </template>
 
