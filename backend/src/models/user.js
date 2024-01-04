@@ -6,7 +6,11 @@ const UserModel = (sequelize, DataTypes) => {
       primaryKey: true,
       allowNull: false,
     },
-    fullName: {
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    lastName:{
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -19,11 +23,36 @@ const UserModel = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull:false,
     },
+    telephone: {
+      type: DataTypes.STRING,
+      allowNull:true,
+    },
     userPicture: {
       type: DataTypes.STRING,
       allowNull:true,
     },
-    fullAddress: {
+    address: {
+      type: DataTypes.STRING,
+      allowNull:false,
+    },
+    addressNumber: {
+      type: DataTypes.INTEGER,
+      allowNull:true,
+      defaultValue:0
+    },
+    zipCode: {
+      type: DataTypes.STRING,
+      allowNull:false,
+    },
+    city: {
+      type: DataTypes.STRING,
+      allowNull:false,
+    },
+    state: {
+      type: DataTypes.STRING,
+      allowNull:true,
+    },
+    country: {
       type: DataTypes.STRING,
       allowNull:false,
     },

@@ -4,18 +4,34 @@
 module.exports = {
   up: async (queryInterface, _Sequelize) =>
     await queryInterface.bulkInsert('Users', [{
-      full_name: 'John Doe',
+      first_name: 'John',
+      last_name: 'Doe',
       email: 'john@email.com',
       password: '123456',
+      telephone: '123456789',
+      user_picture: 'https://i.pravatar.cc/300',
+      address: 'Rua dos Bobos',
+      address_number: 0,
+      zip_code: '12345-678',
+      city: 'São Paulo',
+      state: 'São Paulo',
+      country: 'Brasil',
       is_admin: true,
-      full_address: 'Rua dos Bobos, nº 0',
     },
     {
-      full_name: 'Jane Doe',
+      first_name: 'Jane',
+      last_name: 'Doe',
       email: 'jane@email.com',
       password: '123456',
+      telephone: '123456789',
+      user_picture: 'https://i.pravatar.cc/300',
+      address: 'Rua dos Bobos',
+      address_number: 0,
+      zip_code: '12345-678',
+      city: 'São Paulo',
+      state: 'São Paulo',
+      country: 'Brasil',
       is_admin: false,
-      full_address: 'Rua dos Bobos, nº 1',
     }
   ], {}),
 

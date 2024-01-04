@@ -10,7 +10,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      full_name: {
+      first_name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      last_name:{
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -23,11 +27,36 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      telephone: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       user_picture: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      full_address: {
+      address: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      address_number: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        defaultValue: 0,
+      },
+      zip_code: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      city: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      state: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      country: {
         type: Sequelize.STRING,
         allowNull: false,
       },

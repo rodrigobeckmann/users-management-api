@@ -23,8 +23,8 @@ const listAllUsers = async () => {
 
 const createUser = async (user) => {
   try {
-    const { fullName, email, password } = user;
-    if (!fullName || !email || !password) throw new customError('One or more required fields are missing!', 400);
+    const { firstName, lastName, email, password, address, addressNumber, zipCode, city, state, country } = user;
+    if (!firstName || !lastName || !email || !password || !address || !addressNumber || !zipCode || !city || !state || !country ) throw new customError('One or more required fields are missing!', 400);
     const foundUser = await User.findOne({ where: { email } });
     if (foundUser) throw new customError('This email is already in use!', 409);
     const newUser = await User.create(user);
