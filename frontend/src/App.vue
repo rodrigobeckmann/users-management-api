@@ -24,19 +24,19 @@ const clearUser = async () => {
 }
 
 const updateUser = async () => {
-  const response = await getLoggedUser()
-  if (response) {
+  try {
+    const response = await getLoggedUser()
     userLogged.value = true
     userId.value = response.id
     isAdmin.value = response.isAdmin
     userName.value = response.fullName
-  } else {
+  } catch {
     clearUser()
   }
 }
 
 const redirectUser = async () => {
-  if (userLogged.value) {
+  if (userLogged.value === true) {
     if (isAdmin.value) {
       if (router.currentRoute.value.path === '/') {
         router.push('/control-panel')
