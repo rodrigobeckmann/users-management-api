@@ -38,7 +38,6 @@ const UserModel = (sequelize, DataTypes) => {
     addressNumber: {
       type: DataTypes.INTEGER,
       allowNull:true,
-      defaultValue:0
     },
     zipCode: {
       type: DataTypes.STRING,

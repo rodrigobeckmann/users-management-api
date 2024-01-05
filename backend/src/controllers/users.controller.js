@@ -31,10 +31,10 @@ const createUser = async (req, res) => {
 }
 
 const updatedUser = async (req, res) => {
-  const { fullName, userPicture, fullAddress } = req.body;
+  const { firstName, lastName, address, addressNumber, zipCode, city, state, country  } = req.body;
   const { id } = req.params;
 
-  const { status, data } = await userService.updateUser(id, { fullName, userPicture, fullAddress });
+  const { status, data } = await userService.updateUser(id, { firstName, lastName, address, addressNumber, zipCode, city, state, country  });
 
   return res.status(status).json(data);
 
