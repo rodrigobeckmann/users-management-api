@@ -1,6 +1,6 @@
 <template>
   <label> {{ inputName }}:
-    <input :disabled="!isEditing" class="bg-gray-300 text-black/50" :class="{ '!bg-white !text-black': isEditing }"
+    <input :disabled="!isEditing" class="bg-gray-300 text-black/50 rounded shadow-md mb-2" :class="{ '!bg-white !text-black': isEditing }"
       type="text" :value="value" @input="emit('input', $event.target.value)" />
   </label>
 </template>

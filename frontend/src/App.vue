@@ -34,7 +34,7 @@ const updateUser = async () => {
     userLogged.value = true
     userId.value = response.id
     isAdmin.value = response.isAdmin
-    userName.value = response.fullName
+    userName.value = response.firstName
   } catch {
     clearUser()
   }

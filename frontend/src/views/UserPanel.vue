@@ -1,26 +1,90 @@
 <template>
-  <h1>User {{ $route.params.id }}</h1>
-  <button type="button" @click="logoff">Logoff</button>
+  <div class="flex flex-col w-full !h-auto lg:flex-row items-center justify-center mt-10 gap-10 md:mt-0 md:!size-full">
+
+    
+    <div class="flex flex-col gap-4  bg-gray-300/50 w-80 h-3/4 rounded-md p-5 shadow border items-center md: ">
+      <img class="w-1/2 rounded-full md:w-full" :src="user.userPicture">
+      <button @click="toggleEditPicureModal">Change picture</button>
+    </div>
+
+    <form class="flex flex-col gap-4  bg-gray-300/50 w-80 h-auto rounded-md p-5 shadow border md:w-[32rem] md:h-3/4">
+
+      <EditFormInput :input-name="'First Name'" :is-editing="isEditing" :value="user.firstName" v-on:input="updateValue($event, 'firstName')"/>
+
+      <EditFormInput :input-name="'Last Name'" :is-editing="isEditing" :value="user.lastName" v-on:input="updateValue($event, 'lastName')"/>
+
+      <EditFormInput :input-name="'Telephone'" :is-editing="isEditing" :value="user.telephone" v-on:input="updateValue($event, 'telephone')" />
+      
+      <EditFormInput :input-name="'Address'" :is-editing="isEditing" :value="user.address" v-on:input="updateValue($event, 'address')"/>
+
+      <EditFormInput :input-name="'Address Number'" :is-editing="isEditing" :value="user.addressNumber" v-on:input="updateValue($event, 'addressNumber')"/>
+
+      <EditFormInput :input-name="'Zip Code'" :is-editing="isEditing" :value="user.zipCode" v-on:input="updateValue($event, 'zipCode')"/>
+
+      <EditFormInput :input-name="'City'" :is-editing="isEditing" :value="user.city" v-on:input="updateValue($event, 'city')"/>
+
+      <EditFormInput :input-name="'State'" :is-editing="isEditing" :value="user.state" v-on:input="updateValue($event, 'state')"/>
+
+      <EditFormInput :input-name="'Country'" :is-editing="isEditing" :value="user.country" v-on:input="updateValue($event, 'country')"/>
+
+      <button @click.prevent="toggleEdit">Edit</button>
+      <button type="submit" @click.prevent="handleEditUser">submit</button>
+    </form>
+  </div>
+
+  <EditPictureModal v-if="isEditPictureModalOpen" v-on:closeModal="toggleEditPicureModal"/>
+
 </template>
 
 <script setup>
 import { useRouter, useRoute } from 'vue-router'
-import { getLoggedUser } from '../services/login'
-import { onBeforeMount } from 'vue'
+import { getLoggedUser, updateUser, updateUserPicture } from '../services/login'
+import { onBeforeMount, ref } from 'vue'
+import EditFormInput from '../components/EditFormInput.vue';
+import EditPictureModal from '../components/EditPictureModal.vue';
+
+const user = ref({})
+const isEditing = ref(false)
+const isEditPictureModalOpen = ref(false)
+
 
 const router = useRouter()
 const route = useRoute()
 
-const logoff = async () => {
-  const pastDate = new Date(0).toUTCString();
-  document.cookie = 'token=; expires=' + pastDate + '; path=/;';
-  router.push('/')
+const toggleEdit = () => {
+  isEditing.value = !isEditing.value
+}
+
+const updateValue = (value, key) => {
+  user.value[key] = value
+}
+
+
+const handleEditUser = async () => {
+  console.log(user.value)
+  const body = {
+    firstName: user.value.firstName,
+    lastName: user.value.lastName,
+    address: user.value.address,
+    addressNumber: user.value.addressNumber,
+    zipCode: user.value.zipCode,
+    city: user.value.city,
+    state: user.value.state,
+    country: user.value.country
+  }
+  await updateUser(user.value.id, body)
+}
+
+const toggleEditPicureModal = () => {
+  isEditPictureModalOpen.value = !isEditPictureModalOpen.value
 }
 
 onBeforeMount(async () => {
   const response = await getLoggedUser()
   if (!response || response.id != Number(route.params.id) && !response.isAdmin) {
     router.push('/')
-  } 
+  } else {
+    user.value = response
+  }
 })
 </script>

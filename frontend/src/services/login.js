@@ -21,6 +21,25 @@ export const verifyLogin = async (id) => {
   }
 }
 
+export const updateUser = async (id, user) => {
+  try {
+    const response = await axios.patch(`/users/${id}`, user)
+    return response.data
+  } catch {
+    return false
+  }
+}
+
+export const updateUserPicture = async (id, userPicture) => {
+  try {
+    const response = await axios.patch(`/users/${id}/picture`, userPicture)
+    return response.data
+  } catch {
+    return false
+  }
+
+}
+
 export const getAllUsers = async () => {
   const response = await axios.get(`/users`)
   return response.data
