@@ -1,4 +1,5 @@
 const userService = require('../services/users.service');
+const {getUserIdFromToken} = require('../utils/tokenUtils');
 
 const getUserById = async (req, res) => {
   const { id } = req.params;
@@ -9,7 +10,7 @@ const getUserById = async (req, res) => {
 }
 
 const getLoggedUser = async (req, res) => {
-  const { id } = req.user;
+  const id = getUserIdFromToken(req.headers.authorization);
 
   const { status, data } = await userService.getUserById(id);
 

@@ -8,11 +8,11 @@ const usersRouter = Router();
 
 usersRouter.post('/', userController.createUser);
 usersRouter.get('/', adminValidation, userController.listAllUsers);
-usersRouter.get('/logged', userValidation, userController.getLoggedUser);
+usersRouter.get('/logged', userController.getLoggedUser);
 usersRouter.get('/:id', userValidation, userController.getUserById);
 usersRouter.patch('/:id', userValidation, userController.updatedUser);
 usersRouter.patch('/:id/picture', userValidation, userController.updateUserPicture);
 usersRouter.delete('/:id', adminValidation, userController.deleteUser);
-usersRouter.post('/:id/upload', userPictureUpload.single('userPicture'), userController.uploadUserPicture)
+usersRouter.post('/:id/upload', userValidation,userPictureUpload.single('userPicture'), userController.uploadUserPicture)
 
 module.exports = usersRouter; 

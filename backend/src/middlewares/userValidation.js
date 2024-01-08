@@ -20,6 +20,9 @@ module.exports = async (req, res, next) => {
       throw new customError('Expired or Invalid token', 401);
     }
     const { status, data } = await userService.getUserById(decoded.user.id);
+    if (!data.isAdmin && Number(req.params.id) !== decoded.user.id) {
+      throw new customError('Unauthorized', 401);
+    }
     req.user = data;
     next();
   } catch (error) {
