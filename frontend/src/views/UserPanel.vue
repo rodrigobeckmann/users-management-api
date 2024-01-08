@@ -5,9 +5,11 @@
   <div v-else class="flex flex-col w-full !h-auto lg:flex-row items-center justify-center mt-10 gap-10 md:mt-0 md:!size-full">
 
     
-    <div class="flex flex-col gap-4  bg-gray-300/50 w-80 h-3/4 rounded-md p-5 shadow border items-center md: ">
-      <img class="w-1/2 aspect-square rounded-full object-cover md:w-full" :src="user.userPicture">
-      <button @click="toggleEditPicureModal">Change picture</button>
+    <div class="flex flex-col gap-4  bg-gray-300/50 w-80 h-3/4 rounded-md p-5 shadow border items-center">
+      <div class="flex w-full relative items-center justify-center">
+        <div @click="toggleEditPicureModal" class="flex absolute hover:bg-slate-700/75 w-1/2 aspect-square rounded-full md:w-full items-center justify-center text-transparent cursor-pointer hover:text-black hover:shadow-md">Change Picture</div>
+        <img class="w-1/2 aspect-square rounded-full object-cover shadow-md md:w-full" :src="user.userPicture">
+      </div>
     </div>
 
     <form class="flex flex-col gap-4  bg-gray-300/50 w-80 h-auto rounded-md p-5 shadow border md:w-[32rem] md:h-3/4">
