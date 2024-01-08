@@ -6,7 +6,7 @@
         <input class="rounded shadow-md mb-2" v-model="email" type="email" placeholder="email" />
         <input class="rounded shadow-md mb-2" v-model="password" type="password" placeholder="password" />
       </div>
-      <button class="bg-cyan-200 w-1/2 h-1/4 border border-solid rounded shadow-md" type="submit">Login</button>
+      <button class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold w-full py-2 px-4 rounded" type="submit">Login</button>
     </form>
   </div>
 </template>
