@@ -10,6 +10,7 @@ usersRouter.get('/', adminValidation, userController.listAllUsers);
 usersRouter.get('/logged', userValidation, userController.getLoggedUser);
 usersRouter.get('/:id', userValidation, userController.getUserById);
 usersRouter.patch('/:id', userValidation, userController.updatedUser);
+usersRouter.patch('/:id/picture', userValidation, userController.updateUserPicture);
 usersRouter.delete('/:id', adminValidation, userController.deleteUser);
 
 module.exports = usersRouter; 

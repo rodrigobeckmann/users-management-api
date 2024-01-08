@@ -47,6 +47,20 @@ const updateUser = async (id, body) => {
   }
 }
 
+const updateUserPicture = async (id, body) => {
+  try {
+    console.log(body)
+    const { userPicture } = body;
+    if (!userPicture) throw new customError('Picture is missing', 400);
+    const foundUser = await User.findByPk(id, { attributes: { exclude: ['password'] } });
+    if (!foundUser) throw new customError('User not found!', 404);
+    const updatedUser = await foundUser.update(body);
+    return { status: 200, data: updatedUser };
+  } catch (error) {
+    return handleError(error);
+  }
+}
+
 const deleteUser = async (id) => {
   try {
     const foundUser = await User.findByPk(id);
@@ -63,5 +77,6 @@ module.exports = {
   listAllUsers,
   createUser,
   updateUser,
+  updateUserPicture,
   deleteUser,
 }

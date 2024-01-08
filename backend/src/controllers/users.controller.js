@@ -40,6 +40,15 @@ const updatedUser = async (req, res) => {
 
 }
 
+const updateUserPicture = async (req, res) => {
+  const { userPicture } = req.body;
+  const { id } = req.params;
+
+  const { status, data } = await userService.updateUserPicture(id, { userPicture });
+
+  return res.status(status).json(data);
+}
+
 const deleteUser = async (req, res) => {
   const { id } = req.params;
 
@@ -54,5 +63,6 @@ module.exports = {
   getLoggedUser,
   listAllUsers,
   updatedUser,
+  updateUserPicture,
   deleteUser,
 }
