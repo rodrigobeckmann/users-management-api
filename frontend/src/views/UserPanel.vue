@@ -3,7 +3,7 @@
 
     
     <div class="flex flex-col gap-4  bg-gray-300/50 w-80 h-3/4 rounded-md p-5 shadow border items-center md: ">
-      <img class="w-1/2 rounded-full md:w-full" :src="user.userPicture">
+      <img class="w-1/2 aspect-square rounded-full object-cover md:w-full" :src="user.userPicture">
       <button @click="toggleEditPicureModal">Change picture</button>
     </div>
 
@@ -32,13 +32,13 @@
     </form>
   </div>
 
-  <EditPictureModal v-if="isEditPictureModalOpen" v-on:closeModal="toggleEditPicureModal"/>
+  <EditPictureModal v-if="isEditPictureModalOpen" v-on:closeModal="toggleEditPicureModal" :userActualPicture="user.userPicture" :userId="route.params.id"/>
 
 </template>
 
 <script setup>
 import { useRouter, useRoute } from 'vue-router'
-import { getLoggedUser, updateUser, updateUserPicture } from '../services/login'
+import { getLoggedUser, updateUser, updateUserPicture, getUserById } from '../services/login'
 import { onBeforeMount, ref } from 'vue'
 import EditFormInput from '../components/EditFormInput.vue';
 import EditPictureModal from '../components/EditPictureModal.vue';
@@ -84,7 +84,8 @@ onBeforeMount(async () => {
   if (!response || response.id != Number(route.params.id) && !response.isAdmin) {
     router.push('/')
   } else {
-    user.value = response
+    const userData = await getUserById(route.params.id)
+    user.value = userData
   }
 })
 </script>

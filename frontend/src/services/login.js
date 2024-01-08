@@ -12,6 +12,11 @@ export const getLoggedUser = async (id) => {
   return response.data
 }
 
+export const getUserById = async (id) => {
+  const response = await axios.get(`/users/${id}`)
+  return response.data
+}
+
 export const verifyLogin = async (id) => {
   try {
     const response = await axios.get(`/login/verify`, {params: {id: id}})
@@ -32,7 +37,7 @@ export const updateUser = async (id, user) => {
 
 export const updateUserPicture = async (id, userPicture) => {
   try {
-    const response = await axios.patch(`/users/${id}/picture`, userPicture)
+    const response = await axios.post(`/users/${id}/upload`, userPicture,)
     return response.data
   } catch {
     return false
