@@ -35,9 +35,9 @@ const UserModel = (sequelize, DataTypes) => {
       type: DataTypes.VIRTUAL,
       get() {
         if (this.userHasPicture === true) {
-          return `${process.env.BACKEND_URL}/${this.id}.jpeg`;
+          return `${process.env.BACKEND_URL}/usersPictures/${this.id}.jpeg`;
         } else {
-          return `${process.env.BACKEND_URL}/unknown.jpeg`;
+          return `${process.env.BACKEND_URL}/usersPictures/unknown.jpeg`;
         }
       }
     },
