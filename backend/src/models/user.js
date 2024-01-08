@@ -27,9 +27,19 @@ const UserModel = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull:true,
     },
-    userPicture: {
-      type: DataTypes.STRING,
+    userHasPicture: {
+      type: DataTypes.BOOLEAN,
       allowNull:true,
+    },
+    userPicture: {
+      type: DataTypes.VIRTUAL,
+      get() {
+        if (this.userHasPicture === true) {
+          return `${process.env.BACKEND_URL}/${this.id}.jpeg`;
+        } else {
+          return `${process.env.BACKEND_URL}/unknown.jpeg`;
+        }
+      }
     },
     address: {
       type: DataTypes.STRING,

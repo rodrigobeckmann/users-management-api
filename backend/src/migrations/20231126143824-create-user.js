@@ -31,10 +31,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      user_picture: {
-        type: Sequelize.STRING,
+      user_has_picture: {
+        type: Sequelize.BOOLEAN,
         allowNull: true,
-        defaultValue: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+        defaultValue: false,
       },
       address: {
         type: Sequelize.STRING,
