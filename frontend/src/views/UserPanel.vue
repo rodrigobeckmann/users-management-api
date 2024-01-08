@@ -1,5 +1,8 @@
 <template>
-  <div class="flex flex-col w-full !h-auto lg:flex-row items-center justify-center mt-10 gap-10 md:mt-0 md:!size-full">
+
+  <Loading v-if="isLoading"/>
+
+  <div v-else class="flex flex-col w-full !h-auto lg:flex-row items-center justify-center mt-10 gap-10 md:mt-0 md:!size-full">
 
     
     <div class="flex flex-col gap-4  bg-gray-300/50 w-80 h-3/4 rounded-md p-5 shadow border items-center md: ">
@@ -42,10 +45,12 @@ import { getLoggedUser, updateUser, updateUserPicture, getUserById } from '../se
 import { onBeforeMount, ref } from 'vue'
 import EditFormInput from '../components/EditFormInput.vue';
 import EditPictureModal from '../components/EditPictureModal.vue';
+import Loading from '../components/Loading.vue';
 
 const user = ref({})
 const isEditing = ref(false)
 const isEditPictureModalOpen = ref(false)
+const isLoading = ref(false)
 
 
 const router = useRouter()
@@ -80,6 +85,7 @@ const toggleEditPicureModal = () => {
 }
 
 onBeforeMount(async () => {
+  isLoading.value = true
   const response = await getLoggedUser()
   if (!response || response.id != Number(route.params.id) && !response.isAdmin) {
     router.push('/')
@@ -87,5 +93,6 @@ onBeforeMount(async () => {
     const userData = await getUserById(route.params.id)
     user.value = userData
   }
+  isLoading.value = false
 })
 </script>

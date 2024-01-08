@@ -1,5 +1,8 @@
 <template>
-  <div class="flex flex-col size-full lg:flex-row">
+
+  <Loading v-if="isLoading" />
+
+  <div v-else class="flex flex-col size-full lg:flex-row">
     <div class="order-2 flex w-full justify-center lg:justify-end lg:order-1">
       <ul class="flex flex-col gap-4 items-center lg:m-10 w-80">
         <li
@@ -27,8 +30,10 @@
 import { useRouter } from 'vue-router'
 import { onBeforeMount, ref } from 'vue';
 import { getAllUsers } from '../services/login';
+import Loading from '../components/Loading.vue';
 
 const usersList = ref([])
+const isLoading = ref(false)
 
 const router = useRouter()
 
@@ -37,7 +42,9 @@ const openUserPanel = (id) => {
 }
 
 onBeforeMount(async () => {
+  isLoading.value = true
   const response = await getAllUsers()
   usersList.value = response
+  isLoading.value = false
 })
 </script>
