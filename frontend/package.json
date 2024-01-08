@@ -6,7 +6,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "serve": "serve dist",
+    "copy": "cp -r public/serve.json dist/serve.json",
+    "serve": "npm run copy && serve dist",
     "start": "npm run build && npm run serve"
   },
   "dependencies": {
