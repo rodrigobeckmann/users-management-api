@@ -57,6 +57,18 @@ const deleteUser = async (req, res) => {
   return res.status(status).json();
 }
 
+const uploadUserPicture = async (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ message: 'Format or size invalid'});
+  }
+  
+  const { id } = req.params;
+
+  await userService.updateUserPicture(id, { userHasPicture: true });
+
+  return res.status(200).json({ message: 'Upload successfully'});
+}
+
 module.exports = {
   createUser,
   getUserById,
@@ -65,4 +77,5 @@ module.exports = {
   updatedUser,
   updateUserPicture,
   deleteUser,
+  uploadUserPicture,
 }
