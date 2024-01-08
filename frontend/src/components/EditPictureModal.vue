@@ -1,7 +1,8 @@
 <template>
   <div @click="emit('closeModal')" class="fixed inset-0 bg-gray-500/75">
     <div class="flex size-full items-center justify-center">
-      <div @click.stop class="flex flex-col items-center h-1/2 p-6 bg-white rounded ">
+      <div @click.stop class="flex flex-col items-center h-1/2 p-6 bg-white rounded relative">
+        <font-awesome-icon @click="emit('closeModal')" class="absolute top-0 right-0 p-3 text-gray-500 hover:text-gray-700 cursor-pointer" icon="fa-solid fa-xmark" />
         <img :src="previewURL ? previewURL : userActualPicture" alt="Preview" class="mx-2 aspect-square h-3/4 border object-cover rounded-full shadow-md">
         <form enctype="multipart/form-data">
           <div class="flex flex-col items-center justify-center">

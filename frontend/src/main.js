@@ -8,9 +8,9 @@ import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faUsers, faTrash, faPen } from '@fortawesome/free-solid-svg-icons'
+import { faUsers, faTrash, faPen, faXmark } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faUsers, faTrash, faPen)
+library.add(faUsers, faTrash, faPen, faXmark)
 
 const routes = [
   { path: '/', component: Login},

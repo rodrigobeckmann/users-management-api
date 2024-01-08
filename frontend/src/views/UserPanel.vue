@@ -5,7 +5,7 @@
   <div v-else class="flex flex-col w-full !h-auto lg:flex-row items-center justify-center mt-10 gap-10">
 
     
-    <div class="flex flex-col gap-4 h-full  bg-gray-300/50 w-80 h-3/4 rounded-md p-5 shadow border items-center">
+    <div class="flex flex-col gap-4 h-full bg-gray-300/50 w-80 rounded-md p-5 shadow border items-center">
       <div class="flex w-full relative items-center justify-center">
         <div @click="toggleEditPicureModal" class="flex absolute hover:bg-slate-700/75 w-1/2 aspect-square rounded-full md:w-full items-center justify-center text-transparent cursor-pointer hover:text-black hover:shadow-md">Change Picture</div>
         <img class="w-1/2 aspect-square rounded-full object-cover shadow-md md:w-full" :src="user.userPicture">
