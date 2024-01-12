@@ -1,9 +1,6 @@
 import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
-import Login from './views/Login.vue'
-import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
-import { getLoggedUser } from './services/login';
 
 import router from './router'
 
