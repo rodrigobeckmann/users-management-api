@@ -40,19 +40,6 @@ const updateUser = async () => {
   }
 }
 
-const redirectUser = async () => {
-  if (userLogged.value === true) {
-    if (isAdmin.value) {
-      if (router.currentRoute.value.path === '/') {
-        router.push('/control-panel')
-      }
-    } else {
-      router.push('/user/' + userId.value)
-    }
-  } else {
-    router.push('/')
-  }
-}
 
 const handleLogOff = async () => {
   await logOff()
@@ -61,6 +48,5 @@ const handleLogOff = async () => {
 
 onBeforeMount(async () => {
   await updateUser()
-  await redirectUser()
 })
 </script>
