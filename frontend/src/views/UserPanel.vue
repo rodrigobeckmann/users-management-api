@@ -44,7 +44,6 @@
 </template>
 
 <script setup>
-import { useRouter, useRoute } from 'vue-router'
 import { getLoggedUser, updateUser, updateUserPicture, getUserById } from '../services/login'
 import { onBeforeMount, ref } from 'vue'
 import EditFormInput from '../components/EditFormInput.vue';
@@ -56,9 +55,9 @@ const isEditing = ref(false)
 const isEditPictureModalOpen = ref(false)
 const isLoading = ref(false)
 
-
-const router = useRouter()
-const route = useRoute()
+const props = defineProps({
+  id: String
+})
 
 const toggleEdit = () => {
   isEditing.value = !isEditing.value
@@ -70,17 +69,7 @@ const updateValue = (value, key) => {
 
 
 const handleEditUser = async () => {
-  const body = {
-    firstName: user.value.firstName,
-    lastName: user.value.lastName,
-    address: user.value.address,
-    addressNumber: user.value.addressNumber,
-    zipCode: user.value.zipCode,
-    city: user.value.city,
-    state: user.value.state,
-    country: user.value.country
-  }
-  await updateUser(user.value.id, body)
+  await updateUser(user.value.id, {...user.value})
   toggleEdit()
 }
 
@@ -90,13 +79,8 @@ const toggleEditPicureModal = () => {
 
 onBeforeMount(async () => {
   isLoading.value = true
-  const response = await getLoggedUser()
-  if (!response || response.id != Number(route.params.id) && !response.isAdmin) {
-    router.push('/')
-  } else {
-    const userData = await getUserById(route.params.id)
-    user.value = userData
-  }
+  const userData = await getUserById(props.id)
+  user.value = userData
   isLoading.value = false
 })
 </script>
