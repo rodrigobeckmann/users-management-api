@@ -8,6 +8,7 @@ import { useRouter } from 'vue-router'
 import { getLoggedUser } from './services/login';
 import { onBeforeMount, ref } from 'vue'
 import Header from './components/Header.vue';
+import { removeToken } from './utils/token';
 
 const router = useRouter()
 const userLogged = ref(false)
@@ -15,9 +16,8 @@ const userId = ref(0)
 const isAdmin = ref(false)
 const userName = ref('')
 
-const logOff = async () => {
-  const pastDate = new Date(0).toUTCString();
-  document.cookie = 'token=; expires=' + pastDate + '; path=/;';
+const logOff = () => {
+  removeToken()
   router.push('/')
 }
 

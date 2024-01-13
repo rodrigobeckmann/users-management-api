@@ -12,3 +12,8 @@ export const getToken = () => {
 export const setToken = (token) => {
   document.cookie = `token=${encodeURIComponent(token)}`;
 };
+
+export const removeToken = () => {
+  const pastDate = new Date(0).toUTCString();
+  document.cookie = 'token=; expires=' + pastDate + '; path=/;';
+}
