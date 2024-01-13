@@ -19,8 +19,9 @@ router.beforeEach( async (to, _from, next) => {
     if (to.meta.verifyLogin && !user.isAdmin) return next('/user/' + user.id)
     if (to.meta.authAdmin && user.isAdmin) return next()
     if (to.meta.authUser && user.isAdmin || user.id === to.params.id) return next()
-    return next()
+    return next('/')
   } catch {
+    if (to.path === '/') return next()
     return next('/')
   }
 });
